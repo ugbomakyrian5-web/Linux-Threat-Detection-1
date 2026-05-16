@@ -68,17 +68,17 @@ Filtering for successful root logins confirmed the breach — `91.224.92.79` ach
 - Password-based root login is a high-severity finding on any Linux server
 
 #### 📸 Screenshot 1 — `/var/log/auth.log`: First Ubuntu SSH Login — `2024-10-22` via Public Key
-<img width="1366" height="728" alt="First SSH Login" src="https://github.com/ugbomakyrian5-web/linux-threat-detection-1/blob/main/screenshots/1_auth_log_first_ssh_login.png" />
+<img width="1366" height="727" alt="image" src="https://github.com/user-attachments/assets/d7fcc344-4098-4f3e-a8e7-7c0ee4b6bc07" />
 
 *auth.log — Accepted publickey for ubuntu from 10.9.254.186 — first SSH login 2024-10-22 confirmed*
 
 #### 📸 Screenshot 2 — `/var/log/auth.log`: Botnet Brute-Force — root, roy, sol, user Targeted
-<img width="1366" height="728" alt="SSH Brute Force Botnet" src="https://github.com/ugbomakyrian5-web/linux-threat-detection-1/blob/main/screenshots/2_auth_log_botnet_brute_force.png" />
+<img width="1366" height="729" alt="image" src="https://github.com/user-attachments/assets/914c12b7-5bdb-4462-a116-45e8632d3914" />
 
 *auth.log — Failed password for root, sol, roy, user from multiple IPs — coordinated botnet brute-force confirmed*
 
 #### 📸 Screenshot 3 — `/var/log/auth.log`: Root Breach — `91.224.92.79` Successful Login
-<img width="1366" height="728" alt="Root Breach" src="https://github.com/ugbomakyrian5-web/linux-threat-detection-1/blob/main/screenshots/3_auth_log_root_breach.png" />
+<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/9f6a17f6-0035-4e8b-b199-7630131fba73" />
 
 *auth.log — Accepted password for root from 91.224.92.79 port 51555 — root account compromised*
 
@@ -104,12 +104,12 @@ Inspecting `main.py` directly revealed the vulnerability — `subprocess.check_o
 **Key indicator**: Web logs showing systematic progression from benign requests to OS command injection — `?host=whoami` → `?host=;whoami` (HTTP 200) — confirms successful command injection exploitation.
 
 #### 📸 Screenshot 4 — Auditd: Attacker Accessing `/opt/trypingme/main.py` via Python
-<img width="1366" height="728" alt="Command Injection auditd" src="https://github.com/ugbomakyrian5-web/linux-threat-detection-1/blob/main/screenshots/4_auditd_trypingme_python_access.png" />
+<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/f21b7917-152f-49af-9786-535329f33412" />
 
 *auditd — proctitle=/usr/bin/python3 /opt/trypingme/main.py — attacker reading app source via command injection confirmed*
 
 #### 📸 Screenshot 5 — `main.py` Source: Vulnerable Code + Flag `THM{i_am_vulnerable!}`
-<img width="1366" height="728" alt="Vulnerable Python App Flag" src="https://github.com/ugbomakyrian5-web/linux-threat-detection-1/blob/main/screenshots/5_trypingme_vulnerable_code_flag.png" />
+<img width="1366" height="724" alt="image" src="https://github.com/user-attachments/assets/1c3df4b1-788e-45d6-8df1-d5bc38b7eedd" />
 
 *main.py — subprocess.check_output(cmd, shell=True) with no input sanitisation — THM{i_am_vulnerable!} flag confirmed*
 
@@ -138,7 +138,7 @@ Further auditd analysis revealed the attacker escalated from `whoami` to a full 
 **Key insight**: Process tree analysis traced the attack from a single suspicious `whoami` all the way back to the vulnerable web application — without it, the reverse shell would appear as an isolated, unexplained event.
 
 #### 📸 Screenshot 6 — Auditd Process Tree: `whoami` PPID=1018, TryPingMe PID=577, Python Reverse Shell Confirmed
-<img width="1366" height="728" alt="Process Tree Reverse Shell" src="https://github.com/ugbomakyrian5-web/linux-threat-detection-1/blob/main/screenshots/6_auditd_process_tree_reverse_shell.png" />
+<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/cf364fa8-9d90-4b00-839b-923bc98173be" />
 
 *ausearch process tree — whoami PPID: 1018, TryPingMe PID: 577, Python reverse shell to 10.14.105.255:1337 confirmed*
 
